@@ -2,6 +2,7 @@ const https = require('https')
 const crypto = require('crypto')
 const fs = require('fs')
 const config = require('./config.json')
+const exec = require('child_process').execSync
 
 let getCurrentHash = (callback) => {
   https.get('https://nightly.mtasa.com/?multitheftauto_linux_x64-1.5-rc-latest', (res) => {
@@ -27,15 +28,7 @@ let compareHashes = (hash) => {
   if (lastHash !== hash) {
     console.log('Trigger build!')
     fs.writeFileSync('last-version.txt', hash)
-    https.request({
-      hostname: 'registry.hub.docker.com',
-      port: 443,
-      path: '/u/megathorx/mtasa/trigger/' + config.trigger_token,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).write('{"build": true}').end()
+    exec('curl -H "Content-Type: application/json" --data \'{"build": true}\' -X POST https://registry.hub.docker.com/u/megathorx/mtasa/trigger/' + config.trigger_token + '/')
   }
 }
 
