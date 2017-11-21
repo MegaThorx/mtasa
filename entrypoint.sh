@@ -9,9 +9,9 @@ fi
 if [ ! -e /mtasa/mods/deathmatch/resources ]; then
     echo "Downloading resources..."
     mkdir /mtasa/mods/deathmatch/resources
-    wget -O /root/resources.zip http://mirror.mtasa.com/mtasa/resources/mtasa-resources-latest.zip
-    unzip /root/resources.zip -d /mtasa/mods/deathmatch/resources
-    rm /root/resources.zip
+    wget -O /home/container/resources.zip http://mirror.mtasa.com/mtasa/resources/mtasa-resources-latest.zip
+    unzip /home/container/resources.zip -d /mtasa/mods/deathmatch/resources
+    rm /home/container/resources.zip
 fi
 
 # Start mtasa server
