@@ -2,7 +2,7 @@ FROM debian:latest
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y lib32gcc1 unzip curl libreadline5 libncursesw5 lib32ncursesw5 lib32stdc++6 wget && \
+    apt-get install -y unzip libreadline5 libncursesw5 wget && \
     groupadd -g 2000 container && \ 
     useradd -d /home/container -m container -u 2000 -g 2000 && \
     mkdir /mtasa && \
