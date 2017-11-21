@@ -1,7 +1,5 @@
 #!/bin/bash
 set -e
-chown -R 2000:2000 /mtasa
-su container
 
 if [ ! -e /mtasa/mods/deathmatch/mtaserver.conf ]; then
     echo "Copying configs..."
