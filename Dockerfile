@@ -1,8 +1,10 @@
 FROM debian:latest
 
+ARG DLURL=https://nightly.mtasa.com/?multitheftauto_linux_x64-1.5-rc-latest
+
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y unzip libreadline5 libncursesw5 wget && \
+    apt-get install -y unzip libreadline5 libncursesw5 lib32ncursesw5 lib32stdc++6 zlib1g wget && \
     groupadd -g 2000 container && \ 
     useradd -d /home/container -m container -u 2000 -g 2000 && \
     mkdir /mtasa && \
@@ -10,9 +12,9 @@ RUN apt-get update && \
 
 USER 2000:2000
 
-RUN wget -O /home/container/multitheftauto_linux_x64.tar.gz https://nightly.mtasa.com/?multitheftauto_linux_x64-1.5-rc-latest && \
-    tar -xf /home/container/multitheftauto_linux_x64.tar.gz -C /mtasa --strip-components=1 && \
-    rm -f /home/container/multitheftauto_linux_x64.tar.gz && \
+RUN wget -O /home/container/mtaserver.tar.gz $DLURL && \
+    tar -xf /home/container/mtaserver.tar.gz -C /mtasa --strip-components=1 && \
+    rm -f /home/container/mtaserver.tar.gz && \
     mkdir /mtasa/config && \
     wget -O /home/container/baseconfig.tar.gz https://linux.mtasa.com/dl/baseconfig.tar.gz && \
     tar -xf /home/container/baseconfig.tar.gz -C /mtasa/config --strip-components=1 && \

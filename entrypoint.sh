@@ -14,5 +14,12 @@ if [ ! -e /mtasa/mods/deathmatch/resources ]; then
     rm /home/container/resources.zip
 fi
 
+ls -l /mtasa
+
 # Start mtasa server
-exec /mtasa/mta-server64 -n -t -u
+if [ -e /mtasa/mta-server64 ]; then
+    exec /mtasa/mta-server64 -n -t -u
+else
+    exec /mtasa/mta-server -n -t -u
+fi
+
