@@ -81,8 +81,8 @@ let buildVersion = (version, arch) => {
 
   exec('docker rmi ' + name)
 
-  exec('docker rmi -f $(docker images | grep "^megathorx/mtasa" | awk \'{print $3}\')')
-  exec('docker rmi $(docker images | grep "^<none>" | awk \'{print $3}\')')
+  exec('if docker images | grep "^megathorx/mtasa"; then docker rmi -f $(docker images | grep "^megathorx/mtasa" | awk \'{print $3}\') fi')
+  exec('if docker images | grep "^<none>"; then docker rmi $(docker images | grep "^<none>" | awk \'{print $3}\') fi')
   console.log('build done')
 }
 
