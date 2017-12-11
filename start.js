@@ -78,6 +78,9 @@ let buildVersion = (version, arch) => {
   exec('docker push megathorx/mtasa')
 
   exec('docker rmi ' + name)
+
+  exec('docker rmi -f $(docker images | grep "^megathorx/mtasa" | awk \'{print $3}\')')
+  exec('docker rmi $(docker images | grep "^<none>" | awk \'{print $3}\')')
   console.log('build done')
 }
 
