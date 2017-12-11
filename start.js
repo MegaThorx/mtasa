@@ -57,8 +57,10 @@ let compareHashes = (version, arch, hash) => {
     }
     lastHash[version][arch] = hash
     fs.writeFileSync('versions.json', JSON.stringify(lastHash))
-    console.log('Trigger build!')
+    console.log('Trigger build for ' + version + ' ' + arch)
     buildVersion(version, arch)
+  } else {
+    console.log(version + ' ' + arch + ' is up to date')
   }
 }
 
